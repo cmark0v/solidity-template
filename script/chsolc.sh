@@ -4,7 +4,7 @@ export CFOLDER=src
 export FF=`ls $CFOLDER/*.sol|head -n 1`
 export SOLC_VERSION=`grep -ow '\\^[0-9]\\.[0-9]\\.[0-9]\{1,2\}' $FF|cut -c 2-`
 export CFGFILES=foundry.toml
-export CONTRACTS=`find .|grep \\.sol$`
+export CONTRACTS=`find $CFOLDER|grep \\.sol$`
 echo $CONTRACTS 
 echo $CFGFILES
 if [ $1 ]
@@ -12,7 +12,7 @@ then
 echo "changing solc $SOLC_VERSION changing to $1"
 else
     echo "usage: chsolc.sh <solc-version>"
-    echo "this script changes the solc version in brownie config and all contacts and libraries in contracts folder appear to be using $SOLC_VERSION.."
+    echo "this script changes the solc version in $CFGFILES and all contacts and libraries in $CFOLDER which appear to be using $SOLC_VERSION.."
 fi
 export CHK=`echo $1|grep -ow '[0-9]\\.[0-9]\\.[0-9]\{1,2\}'`
 if [ $CHK ] 
